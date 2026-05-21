@@ -1,0 +1,1 @@
+"""FastAPI history dashboard."""

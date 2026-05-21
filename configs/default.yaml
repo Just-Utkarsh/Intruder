@@ -1,0 +1,91 @@
+# Intruder Detector — default configuration
+# Override via ~/.config/intruder-detector/config.yaml
+
+daemon:
+  poll_interval_sec: 0.5
+  silent_mode: true
+  log_level: INFO
+
+camera:
+  device_index: 0
+  width: 640
+  height: 480
+  fps: 15
+  reconnect_delay_sec: 2.0
+  max_reconnect_attempts: 10
+
+motion:
+  enabled: true
+  min_area: 800
+  cooldown_sec: 1.0
+
+face_detection:
+  backend: insightface  # insightface (RetinaFace) | mediapipe
+  min_face_size: 40
+  detection_threshold: 0.5
+
+recognition:
+  model: buffalo_l  # insightface ArcFace pack
+  similarity_threshold: 0.42
+  unknown_threshold: 0.32
+  min_detection_score: 0.6
+  compare_metric: cosine
+
+intruder:
+  burst_count: 4
+  burst_interval_ms: 150
+  cooldown_between_incidents_sec: 30.0
+  require_motion_first: true
+
+lockscreen:
+  use_loginctl: true
+  use_dbus_screensaver: true
+  process_names:
+    - hyprlock
+    - swaylock
+    - i3lock
+    - xsecurelock
+    - gnome-shell
+    - cinnamon-screensaver
+    - xfce4-screensaver
+    - light-locker
+    - slock
+
+security:
+  kdf_iterations: 600000
+  brute_force_max_attempts: 5
+  brute_force_lockout_sec: 300
+  temp_dir_mode: "0700"
+
+storage:
+  data_dir: "~/.local/share/intruder-detector"
+  config_dir: "~/.config/intruder-detector"
+  file_mode: "0600"
+  dir_mode: "0700"
+
+alerts:
+  telegram_enabled: false
+  telegram_bot_token: ""
+  telegram_chat_id: ""
+  email_enabled: false
+  email_smtp_host: ""
+  email_smtp_port: 587
+  email_from: ""
+  email_to: ""
+  email_password: ""
+
+enrollment:
+  min_samples_per_pose: 2
+  max_blur_variance: 80.0
+  min_brightness: 40
+  max_brightness: 220
+  poses:
+    - front
+    - left
+    - right
+    - up
+    - down
+
+anti_spoofing:
+  enabled: false
+  hook_module: null

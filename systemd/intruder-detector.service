@@ -1,0 +1,26 @@
+[Unit]
+Description=Intruder Detector — AI lockscreen monitoring daemon
+Documentation=file:///usr/share/doc/intruder-detector/README.md
+After=graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=simple
+# Unlock vault before start (run at graphical login — see README)
+# ExecStartPre=/usr/bin/intruder-detector unlock
+ExecStart=/usr/bin/intruder-detector daemon
+ExecStopPost=/usr/bin/intruder-detector lock
+Restart=on-failure
+RestartSec=10
+Environment=PYTHONUNBUFFERED=1
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.local/share/intruder-detector %t/intruder-detector
+PrivateTmp=true
+DeviceAllow=/dev/video0 rw
+
+[Install]
+WantedBy=default.target
