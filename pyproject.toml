@@ -33,11 +33,11 @@ dependencies = [
 linux = ["dbus-python>=1.3.2"]
 
 [project.scripts]
-intruder-detector = "main:main"
+intruder-detector = "intruder_detector.cli.main:main"
 intruder-setup = "intruder_detector.cli.setup:main"
 intruder-history = "intruder_detector.cli.history:main"
 intruder-profile = "intruder_detector.cli.profile:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["intruder_detector*", "detector*", "security*", "profile*", "database*", "dashboard*"]
+include = ["intruder_detector*", "detector*", "security*", "profile*", "database*", "dashboard*", "logs*"]
